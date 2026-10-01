@@ -1,0 +1,65 @@
+{
+  "format_version": 1,
+  "neuron_metadata": [
+    {
+      "body_id": 10,
+      "type_name": "Input",
+      "class": null,
+      "superclass": null,
+      "subclass": null,
+      "soma_side": "L",
+      "root_side": "L",
+      "assigned_ol_hex1": null,
+      "assigned_ol_hex2": null,
+      "selected_neurotransmitter": "acetylcholine",
+      "neurotransmitter_source": "consensus_nt",
+      "source_sign": 1
+    },
+    {
+      "body_id": 11,
+      "type_name": "Inhibitory",
+      "class": null,
+      "superclass": null,
+      "subclass": null,
+      "soma_side": "R",
+      "root_side": "R",
+      "assigned_ol_hex1": null,
+      "assigned_ol_hex2": null,
+      "selected_neurotransmitter": "GABA",
+      "neurotransmitter_source": "celltype_predicted_nt",
+      "source_sign": -1
+    },
+    {
+      "body_id": 12,
+      "type_name": "Readout",
+      "class": null,
+      "superclass": null,
+      "subclass": null,
+      "soma_side": null,
+      "root_side": null,
+      "assigned_ol_hex1": null,
+      "assigned_ol_hex2": null,
+      "selected_neurotransmitter": null,
+      "neurotransmitter_source": "default",
+      "source_sign": 0
+    }
+  ],
+  "outgoing_offsets": [0, 2, 3, 4],
+  "outgoing_edges": [
+    {"target": 1, "contact_count": 2},
+    {"target": 2, "contact_count": 1},
+    {"target": 2, "contact_count": 3},
+    {"target": 2, "contact_count": 1}
+  ],
+  "incoming_offsets": [0, 0, 1, 4],
+  "incoming_edges": [
+    {"source": 0, "edge_id": 0},
+    {"source": 0, "edge_id": 1},
+    {"source": 1, "edge_id": 2},
+    {"source": 2, "edge_id": 3}
+  ],
+  "populations": {
+    "input": [10],
+    "readout": [12]
+  }
+}

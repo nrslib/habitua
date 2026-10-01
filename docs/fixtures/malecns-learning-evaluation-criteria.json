@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "presentation_count": 72,
+  "pair_count": 12,
+  "train_pair_count": 8,
+  "tuning_pair_count": 2,
+  "evaluation_pair_count": 2,
+  "labeled_presentation_count": 72,
+  "held_out_pair_count": 6,
+  "input_order": "pair_index_then_kind_then_a_then_b",
+  "unlabeled_side": "none",
+  "labels": {
+    "automatic_teacher": "same_is_no_change_near_and_unrelated_are_change",
+    "independent": {
+      "no_change": "human_notification_label_no",
+      "small_change": "human_notification_label_uncertain",
+      "change": "human_notification_label_yes",
+      "hold": "unannotated_or_technical_exclusion_is_hold",
+      "positive_mapping": "human_yes_positive_uncertain_reported_separately_hold_is_not_removed_from_denominator"
+    }
+  },
+  "recent_observations": 4,
+  "distance_metric": "minimum_normalized_rms_to_recent_history",
+  "distance_threshold": 5e-7,
+  "previous_absolute_difference_scale": 1e-6,
+  "history_elapsed_time_scale_seconds": 3600.0,
+  "training_mode": "readout_only",
+  "rate_steps_per_observation": 32,
+  "projection_dimension": 32,
+  "response_projection_dimension": 16,
+  "readout_feature_definition": "group_mean_rms_abs_active_scaled_delta_fixed_projection",
+  "readout_l2_regularization": 0.01,
+  "readout_learning_rate": 0.2,
+  "readout_reaction_threshold": 0.5,
+  "decision_threshold_selection": "tuning_split_mean_balanced_accuracy_then_mean_youden_then_criteria_distance",
+  "batch_epochs": 200,
+  "batch_learning_rates": [0.001, 0.01, 0.1],
+  "batch_l2_values": [0.0001, 0.001, 0.01],
+  "minimum_near_neural_l2": 0.001,
+  "minimum_unrelated_image_count": 12,
+  "feature_separation": {
+    "minimum_pair_l2": 1e-6,
+    "minimum_unrelated_to_near_p50_ratio": 5.0
+  },
+  "behavior": {
+    "initial_input_id": "same-00-a",
+    "repeat_input_id": "same-00-b",
+    "different_input_id": "unrelated-00-b",
+    "rest_duration_s": 600.0,
+    "reversal_input_id": "near-00-b",
+    "reversal_strength": 1.0,
+    "rest_protocol": "advance_timestamp_without_observation",
+    "long_repeat_count": 10,
+    "history_max_age_seconds": 300.0,
+    "food_branch_protocol": "same_start_time_branch_food_and_no_food_then_re_evaluate"
+  },
+  "behavior_acceptance": {
+    "minimum_probability_margin": 0.01,
+    "minimum_rest_recovery_delta": 0.01,
+    "rest_recovery_rule": "after_rest_baseline_reset_and_external_hold",
+    "maximum_other_input_side_effect_delta": 0.05,
+    "require_food_action_change": true,
+    "require_food_reaction_change": true,
+    "require_reverse_food_change": true,
+    "require_automatic_overwrite_check": true
+  },
+  "case_memory": {
+    "distance_metric": "l2",
+    "distance_threshold": 4.0,
+    "match_policy": "exact_image_sha256",
+    "time_constant_seconds": 600.0,
+    "logit_scale": 8.0,
+    "max_cases": 256
+  },
+  "real_screen": {
+    "trial": {
+      "bootstrap_replicates": 2000,
+      "bootstrap_seed": 2026091710,
+      "ba_ci_half_width_target": 0.1,
+            "required_class_count_method": "conservative_95pct_ba_half_width_z_squared_p_max_over_2_half_width_squared",
+            "confidence_interval_method": "screen_unit_cluster_bootstrap_for_adoption_record_bootstrap_for_trial_only",
+            "minimum_total_record_count": 60,
+            "maximum_total_record_count": 240,
+            "maximum_hold_fraction": 0.4,
+      "expected_record_counts_by_split": {
+        "training": 120,
+        "tuning": 0,
+        "evaluation": 60,
+        "held_out": 0
+      },
+      "session_split_by_manifest": {
+        "screens": "training",
+        "screens-2": "evaluation"
+      },
+      "split_assignment": "capture_session_order_training_evaluation_then_tuning_held_out",
+      "history_boundary": "stream_id_plus_split"
+    },
+    "adoption": {
+      "minimum_evaluation_record_count": 98,
+      "minimum_independent_positive_count_for_claim": 49,
+      "minimum_independent_negative_count_for_claim": 49,
+      "minimum_independent_positive_screen_unit_count_for_claim": 2,
+            "minimum_independent_negative_screen_unit_count_for_claim": 2,
+            "minimum_evaluation_session_count": 2,
+            "maximum_hold_fraction": 0.4,
+            "performance_condition": "current_response_plus_history",
+            "minimum_balanced_accuracy": 0.55,
+            "minimum_auroc": 0.55,
+            "minimum_paired_balanced_accuracy_difference_lower_bound": 0.01,
+            "paired_difference_rationale": "CNS response plus history must beat retina input plus history by at least 0.01 in the lower 95% session-cluster-bootstrap bound; 0.01 is a technical minimum for detecting a non-zero paired effect, not a domain-utility threshold; zero or negative lower bound is not an adoption claim."
+    }
+  },
+  "brain_roles": [
+    {
+      "id": "brain-change",
+      "role": "change",
+      "seed": 2026091701
+    },
+    {
+      "id": "brain-no-change",
+      "role": "no_change",
+      "seed": 2026091702
+    }
+  ],
+  "human_feedback": [],
+  "seeds": {
+    "base": 2026091700,
+    "reward_shuffle": 2026091703,
+    "wiring_shuffle": 2026091704,
+    "weight_shuffle": 2026091705
+  },
+  "acceptance": {
+    "minimum_balanced_accuracy": 0.55,
+    "minimum_auroc": 0.55,
+    "minimum_consensus_accuracy": 0.55,
+    "minimum_unused_screen_accuracy": 0.50,
+    "consensus_margin": 0.10,
+    "saturation_is_reported_not_silently_ignored": true
+  },
+  "resource_contract": {
+    "maximum_peak_rss_bytes": 15032385536,
+    "inference_target_peak_rss_bytes": 4294967296,
+    "measurement": "/usr/bin/time -l",
+    "build_jobs": 4
+  }
+}

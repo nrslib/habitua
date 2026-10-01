@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "width": 256,
+  "height": 144,
+  "pair_count": 12,
+  "input_types": [
+    "R1-R6",
+    "R8p",
+    "R8y"
+  ],
+  "readout_population": "dn",
+  "simulation_seed_base": 2026091601,
+  "audit": {
+    "same_l2_max": 1e-12,
+    "near_direction_min": 1e-4,
+    "unrelated_direction_min": 0.05,
+    "ordering_margin": 0.01,
+    "expected_same_pair_count": 12
+  },
+  "frozen": {
+    "steps": 32,
+    "response_definition": "h_input_minus_h_rest",
+    "component_scaling": "per_group_rest_l2_with_floor",
+    "component_scale_floor": 1e-06,
+    "zero_response_epsilon": 1e-12,
+    "minimum_active_readout_fraction": 0.001,
+    "maximum_saturation_fraction": 0.05,
+    "minimum_separation_margin": 0.01,
+    "response_groups": [
+      {
+        "name": "kc_typewise",
+        "prefixes": ["KC"],
+        "excluded_population_names": ["KC"]
+      },
+      {
+        "name": "mbon_typewise",
+        "prefixes": ["MBON"],
+        "excluded_population_names": []
+      },
+      {
+        "name": "visual_projection",
+        "prefixes": ["L1", "L2", "L3", "L4", "L5", "LC", "T4", "T5"],
+        "excluded_population_names": []
+      },
+      {
+        "name": "dn_typewise",
+        "prefixes": ["DN"],
+        "excluded_population_names": []
+      }
+    ]
+  },
+  "numerical": {
+    "f32_reference_abs_tolerance": 2e-05,
+    "finite_difference_abs_tolerance": 1e-05,
+    "nonlinear_boundary_margin": 1e-03
+  },
+  "retina": {
+    "coordinate_rule": "assigned_ol_hex_then_weighted_outgoing_target",
+    "unknown_side_policy": "retain",
+    "maximum_inferred_coordinate_count": 10000,
+    "maximum_inferred_spread_p95": 0.25,
+    "maximum_inferred_spread": 3.0
+  },
+  "training": {
+    "projection_dimension": 32,
+    "seed": 2026091602,
+    "wiring_swaps": 32,
+    "weight_shuffle_seed": 2026091603,
+    "feedback_shuffle_seed": 2026091604
+  }
+}
